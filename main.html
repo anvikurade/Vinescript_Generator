@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script type="module" src="vinescript_gen.js"></script>
+    <meta charset="UTF-8" />
+    <title>Vinescript Generator</title>
+    <style>
+        body {
+        font-family: sans-serif;
+        text-align: center;
+        padding: 2rem;
+        }
+        #svg-output {
+        margin-top: 2rem;
+        border: 1px solid #ccc;
+        }
+    </style>
+</head>
+<body>
+    
+    <h1>Vinescript Generator</h1>
+
+    <label>Word for the Vine: </label> <input type="text" id="word-input" placeholder="vine" /> <br>
+    <label> <u> Settings </u> </label> <br> <br>
+    <label for="mySlider">Tension: <span id="sliderValue">0</span></label> <br>
+    <input type="range" min="-2" max="2" value="0.5" step="0.1" class="slider" id="tension-slider"> <br>
+    <label>Minimum vine deviation: </label>  <input type="text" id="min-yrand" style="width: 30px;" placeholder="15"/>
+    <label>Maximum vine deviation: </label> <input type="text" id="max-yrand" style="width: 30px;" placeholder="25"/> <br>
+    <label> Character orientation: </label> 
+        <input type="radio" id="normal-orientation" name="orientation"  checked="checked" /> <label for="normal-orientation"> Upright Orientation</label>
+        <input type="radio" id="alternating-orientation" name="orientation"/> <label for="alternating-orientation"> Alternating Orientation</label> <br>
+    <br>
+    <button id="generate-btn">Generate</button>
+
+    <div id="svg-output"></div>
+
+    <br> <br> <br>
+
+    <button id="downloadBtn">Download the SVG</button>
+
+</body>
+</html>

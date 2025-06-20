@@ -317,12 +317,13 @@ export function drawLeaf(svg, x, y, num, typeStem) {
     }
 }
 
-export function drawLetter(svg, x, y, typeStem, numBerries, numLeaves, rotat) {
+export function drawLetter(svg, x, y, typeStem, numBerries, numLeaves, rotat, index) {
     let svg_internal = document.createElementNS(NS, "g");
+    svg_internal.setAttribute("id", `${index}`)
     if (rotat % 360 != 0) {
         rotat -= 40;
     }
-    svg_internal.setAttribute("transform", `rotate(${rotat}, ${x + 14}, ${y + 49.5})`);
+    svg_internal.setAttribute("transform", `rotate(${rotat}, ${x + 14}, ${y + 49.5}) translate(0, 0)`);
     drawStem(svg_internal, x, y, typeStem);
     drawLeaf(svg_internal, x, y, numLeaves, typeStem);
     drawBerry(svg_internal, x, y, numBerries, typeStem);

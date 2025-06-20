@@ -1,6 +1,11 @@
 import { leafMap } from "./leafdata.js";
 import { generateVinePath, genRandomPoints } from "./vineGen.js"
 
+let points = [{ x: 10 , y: 0 },
+              { x: 49 , y: 0 }];
+let draggedGroup = null;
+let offset = { x: 0, y: 0 };
+
 function random(min, max) {
   return Math.random() * (max - min) + min;
 }
@@ -24,7 +29,7 @@ function generateSVG() {
   // Make the svg element for the vine
   const yrandMax = document.getElementById("max-yrand").value.trim();
   const yrandMin = document.getElementById("min-yrand").value.trim();
-  const points = genRandomPoints(input.length, yrandMin, yrandMax)
+  points = genRandomPoints(input.length, yrandMin, yrandMax)
 
   const vinePathData = generateVinePath(points, tension);
   
@@ -49,9 +54,8 @@ function generateSVG() {
       x = points[index].x - 15;
       y = points[index].y - 49.5;
 
-      leaf.draw(svg, x, y, rotat);
+      leaf.draw(svg, x, y, rotat, index);
 
-      // index += 2;
       index += 1;
 
       if (altOrientation == true) {
@@ -60,12 +64,54 @@ function generateSVG() {
     }
   }
 
-  console.log('SVG injected:', document.getElementById('svg-output').innerHTML);
+  // console.log('SVG injected:', document.getElementById('svg-output').innerHTML);
 
   document.getElementById('svg-output').querySelectorAll('g').forEach(group => {
-    group.addEventListener('click', () => {
+
+    group.addEventListener('mousedown', (e) => {
+
+      const group = e.target.closest('g');
+      if (!group) return;
+
+      draggedGroup = group;
+
+      const match = /translate\(([^,]+),([^)]+)\)/.exec(group.getAttribute('transform'));
+      const startX = parseFloat(match?.[1] || 0);
+      const startY = parseFloat(match?.[2] || 0);
+
+      offset.x = e.clientX - startX;
+      offset.y = e.clientY - startY;
+
+      e.preventDefault();
+
       console.log('Group clicked:', group);
     });
+
+    document.addEventListener('mousemove', (e) => {
+      if (!draggedGroup) return;
+
+      const x = e.clientX - offset.x;
+      const y = e.clientY - offset.y;
+
+      draggedGroup.setAttribute('transform', `translate(${x}, ${y})`);
+
+      let curr_index = Number(draggedGroup.getElementById("id"))
+      points[curr_index].x += x;
+      points[curr_index].y += y;
+
+      const tension = document.getElementById('tension-slider').value.trim().toLowerCase();
+      generateVinePath(points, tension);
+    });
+
+
+    document.addEventListener('mouseup', () => {
+      if (draggedGroup) {
+        // Optionally do something after drag ends
+        console.log('Dropped:', draggedGroup);
+        draggedGroup = null;
+      }
+    });    
+
   });
 
 

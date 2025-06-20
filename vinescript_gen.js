@@ -112,3 +112,13 @@ document.getElementById('downloadBtn').addEventListener('click', () => {
   // Cleanup
   URL.revokeObjectURL(url);
 });
+
+
+// const svg = document.getElementById('svg-output');
+// const groups = svg.querySelectorAll('g');
+
+document.getElementById('svg-output').querySelectorAll('g').forEach(group => {
+  group.addEventListener('click', (event) => {
+    console.log('Group clicked:', group);
+  });
+});

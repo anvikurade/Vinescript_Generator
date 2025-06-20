@@ -110,7 +110,9 @@ function generateSVG() {
         // Optionally do something after drag ends
         console.log('Dropped:', draggedGroup);
         draggedGroup = null;
-        generateVinePath(points, tension);
+        const vinePathData = generateVinePath(points, tension);
+        const svg_path = document.getElementById('vine_path');
+        svg_path.setAttribute("d", `${vinePathData}`);
       }
     });    
 

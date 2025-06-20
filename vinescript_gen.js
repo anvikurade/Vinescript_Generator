@@ -5,6 +5,7 @@ let points = [{ x: 10 , y: 0 },
               { x: 49 , y: 0 }];
 let draggedGroup = null;
 let offset = { x: 0, y: 0 };
+let tension = 0.5;
 
 function random(min, max) {
   return Math.random() * (max - min) + min;
@@ -12,7 +13,7 @@ function random(min, max) {
 
 function generateSVG() {
   const input = document.getElementById('word-input').value.trim().toLowerCase();
-  const tension = document.getElementById('tension-slider').value.trim().toLowerCase();
+  tension = document.getElementById('tension-slider').value.trim().toLowerCase();
   const svgNS = "http://www.w3.org/2000/svg";
   const svg = document.createElementNS(svgNS, "svg");
   const altOrientation = document.getElementById('alternating-orientation').checked;
@@ -99,7 +100,7 @@ function generateSVG() {
       points[curr_index].x += x;
       points[curr_index].y += y;
 
-      const tension = document.getElementById('tension-slider').value.trim().toLowerCase();
+      // const tension = document.getElementById('tension-slider').value.trim().toLowerCase();
       generateVinePath(points, tension);
     });
 

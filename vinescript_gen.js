@@ -57,6 +57,14 @@ function generateSVG() {
       } 
     }
   }
+
+  document.getElementById('svg-output').querySelectorAll('g').forEach(group => {
+    group.addEventListener('click', () => {
+      console.log('Group clicked:', group);
+    });
+  });
+
+
 }
 
 
@@ -121,10 +129,10 @@ document.getElementById('downloadBtn').addEventListener('click', () => {
 // });
 
 
-window.addEventListener('DOMContentLoaded', () => {
-  document.getElementById('svg-output').querySelectorAll('g').forEach(group => {
-      group.addEventListener('click', () => {
-        console.log('Group clicked:', group.id || group);
-      });
-    });
-});
+// window.addEventListener('DOMContentLoaded', () => {
+//   document.getElementById('svg-output').querySelectorAll('g').forEach(group => {
+//       group.addEventListener('click', () => {
+//         console.log('Group clicked:', group.id || group);
+//       });
+//     });
+// });

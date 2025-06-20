@@ -95,7 +95,7 @@ function generateSVG() {
 
       draggedGroup.setAttribute('transform', `translate(${x}, ${y})`);
 
-      let curr_index = Number(draggedGroup.getElementById("id"))
+      let curr_index = Number(draggedGroup.getAttribute("id"))
       points[curr_index].x += x;
       points[curr_index].y += y;
 

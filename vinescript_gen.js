@@ -40,6 +40,8 @@ function generateSVG() {
   let y = - 40;
   let rotat = 0;
   let index = 1;
+
+
   for (const char of input) {
     const leaf = leafMap[char];
     if (leaf && typeof leaf.draw === "function") {
@@ -57,6 +59,8 @@ function generateSVG() {
       } 
     }
   }
+
+  console.log('SVG injected:', document.getElementById('svg-output').innerHTML);
 
   document.getElementById('svg-output').querySelectorAll('g').forEach(group => {
     group.addEventListener('click', () => {

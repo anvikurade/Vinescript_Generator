@@ -114,11 +114,17 @@ document.getElementById('downloadBtn').addEventListener('click', () => {
 });
 
 
-// const svg = document.getElementById('svg-output');
-// const groups = svg.querySelectorAll('g');
+// document.getElementById('svg-output').querySelectorAll('g').forEach(group => {
+//   group.addEventListener('click', () => {
+//     console.log('Group clicked:', group);
+//   });
+// });
 
-document.getElementById('svg-output').querySelectorAll('g').forEach(group => {
-  group.addEventListener('click', (event) => {
-    console.log('Group clicked:', group);
-  });
+
+window.addEventListener('DOMContentLoaded', () => {
+  document.getElementById('svg-output').querySelectorAll('g').forEach(group => {
+      group.addEventListener('click', () => {
+        console.log('Group clicked:', group.id || group);
+      });
+    });
 });

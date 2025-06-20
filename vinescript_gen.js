@@ -101,7 +101,7 @@ function generateSVG() {
       points[curr_index].y += y;
 
       // const tension = document.getElementById('tension-slider').value.trim().toLowerCase();
-      generateVinePath(points, tension);
+      
     });
 
 
@@ -110,6 +110,7 @@ function generateSVG() {
         // Optionally do something after drag ends
         console.log('Dropped:', draggedGroup);
         draggedGroup = null;
+        generateVinePath(points, tension);
       }
     });    
 

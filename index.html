@@ -6,13 +6,16 @@
     <title>Vinescript Generator</title>
     <style>
         body {
-        font-family: sans-serif;
-        text-align: center;
-        padding: 2rem;
+            font-family: sans-serif;
+            text-align: center;
+            padding: 2rem;
         }
         #svg-output {
-        margin-top: 2rem;
-        border: 1px solid #ccc;
+            margin-top: 2rem;
+        }
+        #svg {
+            border: 1px solid #ccc;
+
         }
     </style>
 </head>
@@ -25,8 +28,11 @@
     <label> <u> Settings </u> </label> <br> <br>
     <label for="mySlider">Tension: <span id="sliderValue">0</span></label> <br>
     <input type="range" min="-2" max="2" value="0.5" step="0.1" class="slider" id="tension-slider"> <br>
-    <label>Minimum vine deviation: </label>  <input type="text" id="min-yrand" style="width: 30px;" placeholder="15"/>
-    <label>Maximum vine deviation: </label> <input type="text" id="max-yrand" style="width: 30px;" placeholder="25"/> <br>
+    <label>Minimum vine deviation: </label>  <input type="text" id="min-yrand" style="width: 30px;" placeholder="15" value="15"/>
+    <label>Maximum vine deviation: </label> <input type="text" id="max-yrand" style="width: 30px;" placeholder="25" value="25"/> <br>
+    <label>Minimum vine deviation: </label>  <input type="text" id="min-yrand" style="width: 30px;" placeholder="15" value="15"/>
+    <label>SVG Width: </label> <input type="text" id="svg-width" style="width: 30px;" placeholder="800" value="800"/> 
+    <label>SVG Height: </label>  <input type="text" id="svg-height" style="width: 30px;" placeholder="200" value="200"/> <br>
     <label> Character orientation: </label> 
         <input type="radio" id="normal-orientation" name="orientation"  checked="checked" /> <label for="normal-orientation"> Upright Orientation</label>
         <input type="radio" id="alternating-orientation" name="orientation"/> <label for="alternating-orientation"> Alternating Orientation</label> <br>

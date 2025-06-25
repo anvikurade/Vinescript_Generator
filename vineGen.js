@@ -24,7 +24,7 @@ function distance(p1, p2) {
 export function genRandomPoints(numPoints, yrandMin, yrandMax) {
     // must be num points + 2 
 
-    console.log(yrandMax, yrandMin);
+    // console.log(yrandMax, yrandMin);
 
     let xval = 49;
     const yval = 90;
@@ -42,7 +42,7 @@ export function genRandomPoints(numPoints, yrandMin, yrandMax) {
     for (let i = 0; i < numPoints + 2; i++) {
         xtemp = xval + random(-10, 10);
         ytemp = yval + (random(yrandMax, yrandMin, true) );
-        console.log(ytemp);
+        // console.log(ytemp);
         points.push({ x: xtemp, y: ytemp });
 
         // ytemp = yval + (random(yrandMax, yrandMin, true) );

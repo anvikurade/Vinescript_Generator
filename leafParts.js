@@ -323,7 +323,7 @@ export function drawLetter(svg, x, y, typeStem, numBerries, numLeaves, rotat, in
     if (rotat % 360 != 0) {
         rotat -= 40;
     }
-    svg_internal.setAttribute("transform", `rotate(${rotat}, ${x + 14}, ${y + 49.5}) translate(0, 0)`);
+    svg_internal.setAttribute("transform", ` translate(0, 0) rotate(${rotat}, ${x + 14}, ${y + 49.5})`);
     drawStem(svg_internal, x, y, typeStem);
     drawLeaf(svg_internal, x, y, numLeaves, typeStem);
     drawBerry(svg_internal, x, y, numBerries, typeStem);

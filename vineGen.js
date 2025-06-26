@@ -24,36 +24,42 @@ function distance(p1, p2) {
 export function genRandomPoints(numPoints, yrandMin, yrandMax) {
     // must be num points + 2 
 
-    // console.log(yrandMax, yrandMin);
-
     let xval = 49;
-    const yval = 90;
+    let yval = 110;
     let ytemp = yval + 10;
     let xtemp = 0;
+    let reverse = false;
+    let i;
+    let num_letters = 10;
 
     let points = [{ x: 10 , y: ytemp },
                 { x: 49 , y: yval }];
     ytemp = yval + (random(yrandMax, yrandMin, true) );
-    // xtemp = xval + random(15, 55);
-    // points.push({ x:xtemp, y:ytemp });
 
     xval = 120;
 
-    for (let i = 0; i < numPoints + 2; i++) {
+    for (i = 0; i < numPoints + 2; i++) {
+
         xtemp = xval + random(-10, 10);
         ytemp = yval + (random(yrandMax, yrandMin, true) );
-        // console.log(ytemp);
         points.push({ x: xtemp, y: ytemp });
 
-        // ytemp = yval + (random(yrandMax, yrandMin, true) );
-        // xtemp = xval + random(10, 60);
-        // points.push({ x:xtemp, y:ytemp });
+        if ((i % num_letters == 0) && (i != 0)) {
+            yval += 120;
+            reverse = !reverse;
+            //xval -= 80;
+        }
 
-        xval += 80;
+        if (reverse) {
+            xval -= 80;
+        } else {
+            xval += 80;
+        }
     }
 
-    // console.log(points);
-    return points;
+    let rows = Math.ceil(i/num_letters) - 1;
+
+    return [points, rows];
 }
 
 export function generateVinePath(points, tension = -1) {

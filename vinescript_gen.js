@@ -28,7 +28,6 @@ function generateSVG() {
   
   // Set SVG dimensions
   svg.setAttribute("width", svg_width);
-  svg.setAttribute("height", svg_height);
   svg.setAttribute("id", "svg");
   
   // Clear previous output
@@ -40,8 +39,14 @@ function generateSVG() {
   const yrandMax = document.getElementById("max-yrand").value.trim();
   const yrandMin = document.getElementById("min-yrand").value.trim();
   console.log("random points gen");
-  points = genRandomPoints(input.length, yrandMin, yrandMax);
+  let points_out = genRandomPoints(input.length, yrandMin, yrandMax);
+  points = points_out[0];
+  let rows = points_out[1];
   points_unchanged = JSON.parse(JSON.stringify(points));
+
+  svg_height += rows*120;
+  svg.setAttribute("height", svg_height);
+  document.getElementById('svg-height').setAttribute('text', svg_height);
 
   const vinePathData = generateVinePath(points, tension);
   
@@ -68,9 +73,9 @@ function generateSVG() {
   const start_point = document.createElementNS(NS, "circle");
   start_point.setAttribute("fill", "transparent");
   start_point.setAttribute("stroke", "transparent");
-  start_point.setAttribute("r", "7");
+  start_point.setAttribute("r", "13");
   start_point.setAttribute("cx", `${x + 2}`);
-  start_point.setAttribute("cy", `${y - 1}`);
+  start_point.setAttribute("cy", `${y + 0}`);
   start_point.setAttribute("id", "circle");
   start_point_g.appendChild(start_point);
   svg.appendChild(start_point_g);
@@ -99,7 +104,7 @@ function generateSVG() {
   const end_point = document.createElementNS(NS, "circle");
   end_point.setAttribute("fill", "transparent");
   end_point.setAttribute("stroke", "transparent");
-  end_point.setAttribute("r", "7");
+  end_point.setAttribute("r", "10");
   end_point.setAttribute("cx", `${points[index].x - 2}`);
   end_point.setAttribute("cy", `${points[index].y - 1}`);
   end_point.setAttribute("id", "circle");
@@ -140,7 +145,11 @@ function generateSVG() {
       const x = e.clientX - offset.x;
       const y = e.clientY - offset.y;
 
-      draggedGroup.setAttribute('transform', `translate(${x}, ${y})`);
+      const regex = /([a-zA-Z]+)\(([^,]+)\s*,\s*([^,]+)\s*\)/;
+      let new_transform = String(draggedGroup.getAttribute('transform'));
+      new_transform = new_transform.replace(regex, `translate(${x}, ${y})`);
+
+      draggedGroup.setAttribute('transform', new_transform);
 
 
       // let curr_index = Number(draggedGroup.getAttribute("id"))
